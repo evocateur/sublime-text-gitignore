@@ -8,7 +8,7 @@ class ExcludeIgnoredCommand(sublime_plugin.TextCommand):
         pd = w.project_data()
         for folder_setting in pd['folders']:
             path            = folder_setting['path']
-            file_patterns   = [".gitignore"]
+            file_patterns   = []
             folder_patterns = []
             gitignore       = os.path.join(path, ".gitignore")
             if (os.path.exists(gitignore)):
