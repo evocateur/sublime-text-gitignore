@@ -14,12 +14,14 @@ class ExcludeIgnoredCommand(sublime_plugin.TextCommand):
             if (os.path.exists(gitignore)):
                 for pattern in open(gitignore):
                     pattern = pattern.strip()
-                    if (pattern[-1] == os.sep):
+                    if (is_dir(pattern) or pattern[-1] == os.sep):
                         folder_patterns.append(pattern[:-1])
                     else:
                         file_patterns.append(pattern)
             folder_setting["file_exclude_patterns"]   = file_patterns
             folder_setting["folder_exclude_patterns"] = folder_patterns
         w.set_project_data(pd)
-                
-                
+
+def is_dir(cwd, pattern):
+    fullpath = os.path.join(cwd, pattern)
+    return os.path.exists(fullpath) and os.path.isdir(fullpath)
