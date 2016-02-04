@@ -14,7 +14,9 @@ class ExcludeIgnoredCommand(sublime_plugin.TextCommand):
             if (os.path.exists(gitignore)):
                 for pattern in open(gitignore):
                     pattern = pattern.strip()
-                    if (is_dir(pattern) or pattern[-1] == os.sep):
+                    if (is_dir(path, pattern)):
+                        folder_patterns.append(pattern)
+                    elif (pattern[-1] == os.sep):
                         folder_patterns.append(pattern[:-1])
                     else:
                         file_patterns.append(pattern)
